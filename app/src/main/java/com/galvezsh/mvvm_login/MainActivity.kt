@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.galvezsh.mvvm_login.ui.theme.MVVM_LoginTheme
 import com.galvezsh.mvvm_login.ui.theme.login.ui.LoginScreen
+import com.galvezsh.mvvm_login.ui.theme.login.ui.LoginViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +13,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MVVM_LoginTheme {
-                LoginScreen()
+                LoginScreen( LoginViewModel() )
             }
         }
     }

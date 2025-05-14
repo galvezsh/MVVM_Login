@@ -57,6 +57,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Runtime-livedata
+    implementation(libs.androidx.runtime.livedata)
+
     // Extended icons for buttons
     implementation(libs.androidx.material.icons.extended)
 

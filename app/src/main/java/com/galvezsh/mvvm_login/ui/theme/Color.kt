@@ -16,8 +16,5 @@ class Colors {
 
         val primaryAppColor = Color(0xFFFF6E40)
         val secondaryAppColor = Color(0xFFFF9E80)
-
-//        val primaryAppColor = Color(0xFFFF4303)
-//        val secondaryAppColor = Color(0xFFF78058)
     }
 }
