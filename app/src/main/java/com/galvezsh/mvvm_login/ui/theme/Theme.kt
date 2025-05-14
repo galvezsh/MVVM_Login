@@ -1,6 +1,5 @@
 package com.galvezsh.mvvm_login.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -12,15 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Colors.primaryDarkColorScheme,
+    secondary = Colors.secondaryDarkColorScheme,
+    tertiary = Colors.tertiaryDarkColorScheme
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Colors.primaryLightColorScheme,
+    secondary = Colors.secondaryLightColorScheme,
+    tertiary = Colors.tertiaryLightColorScheme
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
