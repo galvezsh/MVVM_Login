@@ -14,7 +14,10 @@ class Colors {
         val secondaryDarkColorScheme = Color(0xFF625b71)
         val tertiaryDarkColorScheme = Color(0xFF7D5260)
 
-        val primaryAppColor = Color(0xFFFF4303)
-        val secondaryAppColor = Color(0xFFF78058)
+        val primaryAppColor = Color(0xFFFF6E40)
+        val secondaryAppColor = Color(0xFFFF9E80)
+
+//        val primaryAppColor = Color(0xFFFF4303)
+//        val secondaryAppColor = Color(0xFFF78058)
     }
 }

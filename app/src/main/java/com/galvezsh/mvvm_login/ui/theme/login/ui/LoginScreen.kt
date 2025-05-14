@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -19,6 +20,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -63,10 +65,8 @@ fun Base( modifier: Modifier ) {
         ForgotPassword( modifier = Modifier.align( Alignment.End ))
         Spacer( 8 )
         LoginButton()
-        Spacer( 16 )
-        SignupText( modifier = Modifier.align( Alignment.CenterHorizontally ) )
         Spacer( 8 )
-        SignupButton()
+        SignupText( modifier = Modifier.align( Alignment.CenterHorizontally ) )
     }
 }
 
@@ -87,14 +87,11 @@ fun Spacer( dp: Int ) {
 @Composable
 fun HeaderImage( modifier: Modifier ) {
     Image(
-        painter = painterResource( id = R.drawable.ic_app ),
+        painter = painterResource( id = R.drawable.ic_app_2 ),
         contentDescription = "HeaderImage",
         modifier = modifier
-            .size( 192.dp )
-            .shadow(
-                elevation = 12.dp,
-                shape = CircleShape
-            )
+            .size( 168.dp )
+            .shadow( elevation = 12.dp, shape = CircleShape )
             .clip( CircleShape )
     )
 }
@@ -108,12 +105,15 @@ fun EmailField() {
         enabled = true,
         onValueChange = { email = it },
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape( 8.dp ),
         placeholder = { Text( text = "Email" ) },
         keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Email ),
         singleLine = true,
         colors = TextFieldDefaults.colors(
             focusedTextColor = Color( 0xFF636262 ),
             unfocusedTextColor = Color( 0xFF636262 ),
+            focusedPlaceholderColor = Color( 0xFF636262 ),
+            unfocusedPlaceholderColor = Color( 0xFF636262 ),
             focusedContainerColor = Color( 0xFFDEDDDD ),
             unfocusedContainerColor = Color( 0xFFDEDDDD ),
             focusedIndicatorColor = Color.Transparent,
@@ -132,6 +132,7 @@ fun PasswordField() {
         enabled = true,
         onValueChange = { password = it },
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape( 8.dp ),
         visualTransformation = if (visiblePassword) VisualTransformation.None else PasswordVisualTransformation(),
         placeholder = { Text( text = "Password" ) },
         keyboardOptions = KeyboardOptions( keyboardType = KeyboardType.Password ),
@@ -139,6 +140,8 @@ fun PasswordField() {
         colors = TextFieldDefaults.colors(
             focusedTextColor = Color( 0xFF636262 ),
             unfocusedTextColor = Color( 0xFF636262 ),
+            focusedPlaceholderColor = Color( 0xFF636262 ),
+            unfocusedPlaceholderColor = Color( 0xFF636262 ),
             focusedContainerColor = Color( 0xFFDEDDDD ),
             unfocusedContainerColor = Color( 0xFFDEDDDD ),
             focusedIndicatorColor = Color.Transparent,
@@ -148,7 +151,10 @@ fun PasswordField() {
             val image = if (visiblePassword) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
             val description = if (visiblePassword) "Hide Password" else "Show Password"
 
-            IconButton( onClick = { visiblePassword = !visiblePassword } ) {
+            IconButton(
+                onClick = { visiblePassword = !visiblePassword },
+                colors = IconButtonDefaults.iconButtonColors( contentColor = Color(0xFF636262) )
+            ) {
                 Icon( imageVector = image, contentDescription = description )
             }
         }
@@ -171,6 +177,7 @@ fun LoginButton() {
     Button(
         onClick = {},
         modifier = Modifier.fillMaxWidth().height( 48.dp ),
+        shape = RoundedCornerShape( 8.dp ),
         enabled = true,
         colors = ButtonDefaults.buttonColors(
             containerColor = Colors.primaryAppColor,
@@ -186,22 +193,8 @@ fun SignupText(modifier: Modifier) {
     Text(
         text = "Don't have an account? Sign Up for free!",
         fontSize = 14.sp,
-        modifier = modifier,
-        color = Color.Gray
+        modifier = modifier.clickable {  },
+        fontWeight = FontWeight.Bold,
+        color = Colors.primaryAppColor
     )
-}
-
-@Composable
-fun SignupButton() {
-    Button(
-        onClick = {},
-        modifier = Modifier.fillMaxWidth().height( 48.dp ),
-        enabled = false,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Colors.primaryAppColor,
-            disabledContainerColor = Colors.secondaryAppColor,
-            contentColor = Color.White,
-            disabledContentColor = Color.White
-        )
-    ) { Text( text = "Sign Un" ) }
 }
