@@ -51,6 +51,7 @@ import kotlinx.coroutines.launch
 
 //@Preview( showBackground = true, showSystemUi = true )
 @Composable
+
 fun LoginScreen( loginViewModel: LoginViewModel ) {
     Box( modifier = Modifier.fillMaxSize().padding( 16.dp ) ) {
         Base( modifier = Modifier.align( Alignment.Center ), loginViewModel )
@@ -62,7 +63,8 @@ fun Base( modifier: Modifier, loginViewModel: LoginViewModel ) {
 
     val email: String by loginViewModel.email.observeAsState( initial = "" )
     val password: String by loginViewModel.password.observeAsState( initial = "" )
-    val loginEnabled: Boolean by loginViewModel.loginEnabled.observeAsState( initial = false )
+    val validEmail: Boolean by loginViewModel.validEmail.observeAsState( initial = false )
+    val validPassword: Boolean by loginViewModel.validPassword.observeAsState( initial = false )
     val isLoading: Boolean by loginViewModel.isLoading.observeAsState( initial = false )
     val corrutineScope = rememberCoroutineScope()
 
@@ -77,10 +79,12 @@ fun Base( modifier: Modifier, loginViewModel: LoginViewModel ) {
             EmailField( email ) { loginViewModel.onLoginChanged( it, password ) }
             Spacer( 4 )
             PasswordField( password ) { loginViewModel.onLoginChanged( email, it ) }
-            Spacer( 8 )
+            Spacer( 4 )
+            InvalidFieldTexts( validEmail, validPassword, modifier = Modifier.align( Alignment.CenterHorizontally ) )
+            Spacer( 4 )
             ForgotPassword( modifier = Modifier.align( Alignment.End ))
             Spacer( 8 )
-            LoginButton( loginEnabled ) { corrutineScope.launch { loginViewModel.onLoginSelected( email, password ) } }
+            LoginButton( validEmail, validPassword ) { corrutineScope.launch { loginViewModel.onLoginSelected( email, password ) } }
             Spacer( 8 )
             SignupText( modifier = Modifier.align( Alignment.CenterHorizontally ) )
         }
@@ -176,6 +180,26 @@ fun PasswordField( password: String, onTextFieldChanged: (String) -> Unit ) {
 }
 
 @Composable
+fun InvalidFieldTexts( validEmail: Boolean, validPassword: Boolean, modifier: Modifier ) {
+    if (!validEmail){
+        Text(
+            text = "Invalid email",
+            color = Color.Red,
+            modifier = modifier,
+        )
+    }
+
+    if (!validPassword) {
+        Text(
+            text = "Password must be at least 8 characters length",
+            color = Color.Red,
+            modifier = modifier.padding( top = 8.dp )
+        )
+    }
+
+}
+
+@Composable
 fun ForgotPassword( modifier: Modifier ) {
     Text(
         text = "Forgot password?",
@@ -187,12 +211,12 @@ fun ForgotPassword( modifier: Modifier ) {
 }
 
 @Composable
-fun LoginButton( loginEnabled: Boolean, onLoginSelected: () -> Unit ) {
+fun LoginButton( validEmail: Boolean, validPassword: Boolean, onLoginSelected: () -> Unit ) {
     Button(
         onClick = { onLoginSelected() },
         modifier = Modifier.fillMaxWidth().height( 48.dp ),
         shape = RoundedCornerShape( 8.dp ),
-        enabled = loginEnabled,
+        enabled = validEmail && validPassword,
         colors = ButtonDefaults.buttonColors(
             containerColor = Colors.primaryAppColor,
             disabledContainerColor = Colors.secondaryAppColor,

@@ -14,8 +14,11 @@ class LoginViewModel: ViewModel() {
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
 
-    private val _loginEnabled = MutableLiveData<Boolean>()
-    val loginEnabled: LiveData<Boolean> = _loginEnabled
+    private val _validEmail = MutableLiveData<Boolean>()
+    val validEmail: LiveData<Boolean> = _validEmail
+
+    private val _validPassword = MutableLiveData<Boolean>()
+    val validPassword: LiveData<Boolean> = _validPassword
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -23,7 +26,8 @@ class LoginViewModel: ViewModel() {
     fun onLoginChanged( email: String, password: String ) {
         _email.value = email
         _password.value = password
-        _loginEnabled.value = isValidEmail(email) && isValidPassword(password)
+        _validEmail.value = isValidEmail(email)
+        _validPassword.value = isValidPassword(password)
     }
 
     suspend fun onLoginSelected( email: String, password: String ) {
