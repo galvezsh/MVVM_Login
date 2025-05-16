@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    // Kotlin serialize
+    alias(libs.plugins.kotlin.serializacion)
 }
 
 android {
@@ -62,5 +65,11 @@ dependencies {
 
     // Extended icons for buttons
     implementation(libs.androidx.material.icons.extended)
+
+    // Navigation-compose
+    implementation(libs.androidx.navigation.compose)
+
+    // Kotlin serialize
+    implementation(libs.kotlinx.serliazation.json)
 
 }

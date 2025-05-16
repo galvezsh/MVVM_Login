@@ -1,4 +1,4 @@
-package com.galvezsh.mvvm_login.ui.theme.login.ui
+package com.galvezsh.mvvm_login.ui.viewModel
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
